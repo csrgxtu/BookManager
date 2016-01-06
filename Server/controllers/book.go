@@ -15,3 +15,24 @@ func (this *BookController) Create() {
   this.Data["json"] = &rt
   this.ServeJson()
 }
+
+func (this *BookController) Read() {
+  var rt models.Results
+
+  this.Data["json"] = &rt
+  this.ServeJson()
+}
+
+func (this *BookController) Update() {
+  var rt models.Results
+
+  this.Data["json"] = &rt
+  this.ServeJson()
+}
+
+func (this *BookController) Delete() {
+  var rt models.Results
+
+  this.Data["json"] = &rt
+  this.ServeJson()
+}
