@@ -9,7 +9,6 @@ func init() {
     beego.Router("/", &controllers.MainController{})
 
 		// BookController
-		// beego.Router("/article", &controllers.MainController{}, "post:NewArticle")
 		beego.Router("/book", &controllers.BookController{}, "put:CreateBook")
 		beego.Router("/book", &controllers.BookController{}, "get:ReadBook")
 		beego.Router("/book", &controllers.BookController{}, "post:UpdateBook")
