@@ -18,5 +18,4 @@ func init() {
 		beego.Router("/books", &controllers.BookController{}, "Get: ReadBooks")
 		beego.Router("/books", &controllers.BookController{}, "Post: UpdateBooks")
 		beego.Router("/books", &controllers.BookController{}, "Delete: DeleteBooks")
-
 }
