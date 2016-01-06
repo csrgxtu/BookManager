@@ -1,5 +1,7 @@
 package io.github.csrgxtu.bookmanager;
 
+import android.util.Log;
+
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -24,7 +26,8 @@ public class RestfulClient {
 
     public Call doPut(String url, String json, Callback callback) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(JSON, json);
+        RequestBody body = RequestBody.create(JSON, "{'isbn': '323232322', 'title': 'rose'}");
+        Log.i("doPut", Long.toString(body.contentLength()));
         Request request = new Request.Builder()
                 .url(url)
                 .put(body)

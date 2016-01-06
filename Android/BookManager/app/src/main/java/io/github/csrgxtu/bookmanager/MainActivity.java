@@ -97,24 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String scanFormat = scanningResult.getFormatName();
 
             // put book data to the server
-            String url = "http://192.168.1.103:8080/";
-//            try {
-//                HttpResponse<JsonNode> jsonResponse = Unirest.put(url)
-//                        .header("Content-Type", "application/json")
-//                        .field("isbn", "13423232323")
-//                        .asJson();
-//                System.out.println(jsonResponse.getBody().toString());
-//
-//                formatTxt.setText("FORMAT: " + scanFormat);
-//                contentTxt.setText("CONTENT: " + scanContent);
-//            } catch (UnirestException e) {
-//                e.printStackTrace();
-//                Log.e("BookManager", "put exception");
-//            }
-
+            String url = "http://192.168.1.103:8080/book";
             try {
                 RestfulClient restClient = new RestfulClient();
-                restClient.doGet(url, new Callback() {
+                restClient.doPut(url, "{'isbn': '322322', 'title': 'what'}", new Callback() {
                     @Override
                     public void onFailure(Request request, IOException e) {
                         e.printStackTrace();
@@ -133,8 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             // Do what you want to do with the response.
                             Log.i("onCreate", "response successful");
-//                            formatTxt.setText("FORMAT: " + scanFormat);
-//                            contentTxt.setText("CONTENT: " + scanContent);
+
                         } else {
                             // Request not successful
                             Log.i("onCreate", "response is not successful");
@@ -144,6 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            formatTxt.setText("FORMAT: " + scanFormat);
+            contentTxt.setText("CONTENT: " + scanContent);
 
         } else{
             Toast toast = Toast.makeText(getApplicationContext(),

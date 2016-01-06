@@ -14,6 +14,7 @@ type BookController struct {
 func (this *BookController) CreateBook() {
 	var book models.Book
 	json.Unmarshal(this.Ctx.Input.RequestBody, &book)
+	beego.Info(book)
 	var rt models.Results
 
 	nBook, err := services.CreateBook(book)
