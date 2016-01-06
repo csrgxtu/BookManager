@@ -6,6 +6,7 @@ import (
 )
 
 var BMSession *mgo.Session
+var BMDB = beego.AppConfig.String("bm_mongodb")
 
 func init() {
   BMSessionInit()

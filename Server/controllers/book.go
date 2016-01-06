@@ -3,6 +3,8 @@ package controllers
 import (
 	"github.com/astaxie/beego"
   "rigo/models"
+  "rigo/services"
+  "encoding/json"
 )
 
 type BookController struct {
@@ -10,7 +12,22 @@ type BookController struct {
 }
 
 func (this *BookController) CreateBook() {
+  var book models.Book
+  json.Unmarshal(this.Ctx.Input.RequestBody, &book)
+
   var rt models.Results
+
+  nBook, err := services.CreateBook(book)
+  if err != nil {
+    rt.Error = true
+    rt.Msg = err.Error()
+  } else {
+    rt.Error = false
+    rt.Msg = "Successful"
+    rt.Total = 1
+    rt.Data = make([]models.Recs, rt.Total)
+    rt.Data[0] = nBook
+  }
 
   this.Data["json"] = &rt
   this.ServeJson()
