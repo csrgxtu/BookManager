@@ -12,12 +12,14 @@ type BookController struct {
 }
 
 func (this *BookController) CreateBook() {
-  var book models.Book
-  json.Unmarshal(this.Ctx.Input.RequestBody, &book)
+  var requstedBook models.Book
+	beego.Info(this.Ctx.Input.RequestBody)
+	json.Unmarshal(this.Ctx.Input.RequestBody, &requstedBook)
+	beego.Info(requstedBook)
 
   var rt models.Results
 
-  nBook, err := services.CreateBook(book)
+  nBook, err := services.CreateBook(requstedBook)
   if err != nil {
     rt.Error = true
     rt.Msg = err.Error()

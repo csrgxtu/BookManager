@@ -9,9 +9,9 @@ func init() {
     beego.Router("/", &controllers.MainController{})
 
 		// BookController
-		beego.Router("/book", &controllers.BookController{}, "put:CreateBook")
+		beego.Router("/book", &controllers.BookController{}, "post:CreateBook")
 		beego.Router("/book", &controllers.BookController{}, "get:ReadBook")
-		beego.Router("/book", &controllers.BookController{}, "post:UpdateBook")
+		// beego.Router("/book", &controllers.BookController{}, "post:UpdateBook")
 		beego.Router("/book", &controllers.BookController{}, "delete:DeleteBook")
 
 		beego.Router("/books", &controllers.BookController{}, "put:CreateBooks")
