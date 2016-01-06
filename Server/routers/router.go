@@ -9,13 +9,14 @@ func init() {
     beego.Router("/", &controllers.MainController{})
 
 		// BookController
-		beego.Router("/book", &controllers.BookController{}, "Put: CreateBook")
-		beego.Router("/book", &controllers.BookController{}, "Get: ReadBook")
-		beego.Router("/book", &controllers.BookController{}, "Post: UpdateBook")
-		beego.Router("/book", &controllers.BookController{}, "Delete: DeleteBook")
+		// beego.Router("/article", &controllers.MainController{}, "post:NewArticle")
+		beego.Router("/book", &controllers.BookController{}, "put:CreateBook")
+		beego.Router("/book", &controllers.BookController{}, "get:ReadBook")
+		beego.Router("/book", &controllers.BookController{}, "post:UpdateBook")
+		beego.Router("/book", &controllers.BookController{}, "delete:DeleteBook")
 
-		beego.Router("/books", &controllers.BookController{}, "Put: CreateBooks")
-		beego.Router("/books", &controllers.BookController{}, "Get: ReadBooks")
-		beego.Router("/books", &controllers.BookController{}, "Post: UpdateBooks")
-		beego.Router("/books", &controllers.BookController{}, "Delete: DeleteBooks")
+		beego.Router("/books", &controllers.BookController{}, "put:CreateBooks")
+		beego.Router("/books", &controllers.BookController{}, "get:ReadBooks")
+		beego.Router("/books", &controllers.BookController{}, "post:UpdateBooks")
+		beego.Router("/books", &controllers.BookController{}, "delete:DeleteBooks")
 }
