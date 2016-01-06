@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego"
   "BookManager/Server/models"
 	"BookManager/Server/services"
-  "encoding/json"
+  // "encoding/json"
 )
 
 type BookController struct {
@@ -12,14 +12,13 @@ type BookController struct {
 }
 
 func (this *BookController) CreateBook() {
-  var requstedBook models.Book
-	beego.Info(this.Ctx.Input.RequestBody)
-	json.Unmarshal(this.Ctx.Input.RequestBody, &requstedBook)
-	beego.Info(requstedBook)
-
+	var isbn = this.GetString("isbn")
+	var book models.Book
   var rt models.Results
 
-  nBook, err := services.CreateBook(requstedBook)
+	book.Isbn = isbn
+
+  nBook, err := services.CreateBook(book)
   if err != nil {
     rt.Error = true
     rt.Msg = err.Error()
