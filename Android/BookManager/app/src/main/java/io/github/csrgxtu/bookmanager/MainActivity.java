@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,18 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn;
@@ -82,8 +95,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //we have a result
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
-            formatTxt.setText("FORMAT: " + scanFormat);
-            contentTxt.setText("CONTENT: " + scanContent);
+
+            // put book data to the server
+            String url = "http://192.168.1.103:8080/";
+//            try {
+//                HttpResponse<JsonNode> jsonResponse = Unirest.put(url)
+//                        .header("Content-Type", "application/json")
+//                        .field("isbn", "13423232323")
+//                        .asJson();
+//                System.out.println(jsonResponse.getBody().toString());
+//
+//                formatTxt.setText("FORMAT: " + scanFormat);
+//                contentTxt.setText("CONTENT: " + scanContent);
+//            } catch (UnirestException e) {
+//                e.printStackTrace();
+//                Log.e("BookManager", "put exception");
+//            }
+
+            try {
+                RestfulClient restClient = new RestfulClient();
+                restClient.doGet(url, new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        e.printStackTrace();
+                        Log.i("onCreate", "request failure");
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String responseStr = response.body().string();
+                            try {
+                                JSONObject Jobject = new JSONObject(responseStr);
+                                Log.i("onCreate", Jobject.toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            // Do what you want to do with the response.
+                            Log.i("onCreate", "response successful");
+//                            formatTxt.setText("FORMAT: " + scanFormat);
+//                            contentTxt.setText("CONTENT: " + scanContent);
+                        } else {
+                            // Request not successful
+                            Log.i("onCreate", "response is not successful");
+                        }
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         } else{
             Toast toast = Toast.makeText(getApplicationContext(),
                     "No scan data received!", Toast.LENGTH_SHORT);
