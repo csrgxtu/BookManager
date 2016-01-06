@@ -3,7 +3,7 @@ package services
 import (
   "github.com/astaxie/beego"
   "gopkg.in/mgo.v2/bson"
-  "rigo/models"
+  "BookManager/Server/models"
 )
 
 var BookCollection = beego.AppConfig.String("bm_mongocollection_book")

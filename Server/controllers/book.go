@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"rigo/services"
-  "rigo/models"
+  "BookManager/Server/models"
+	"BookManager/Server/services"
   "encoding/json"
 )
 

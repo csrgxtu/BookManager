@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"rigo/models"
+	"BookManager/Server/models"
 )
 
 type MainController struct {
