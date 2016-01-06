@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+  "rigo/models"
 )
 
 type BookController struct {
@@ -9,5 +10,8 @@ type BookController struct {
 }
 
 func (this *BookController) Create() {
-  c.TplNames = "index.tpl"
+  var rt models.Results
+
+  this.Data["json"] = &rt
+  this.ServeJson()
 }
