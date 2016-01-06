@@ -26,7 +26,7 @@ public class RestfulClient {
 
     public Call doPut(String url, String json, Callback callback) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(JSON, "{'isbn': '323232322', 'title': 'rose'}");
+        RequestBody body = RequestBody.create(JSON, "{\"isbn\": \"323232322\", \"title\": \"rose\"}");
         Log.i("doPut", Long.toString(body.contentLength()));
         Request request = new Request.Builder()
                 .url(url)
