@@ -1,5 +1,6 @@
 package io.github.csrgxtu.bookmanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
+
 
         scanBtn = (Button)findViewById(R.id.scan_button);
         formatTxt = (TextView)findViewById(R.id.scan_format);
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String url = "http://192.168.1.103:8080/book";
             try {
                 RestfulClient restClient = new RestfulClient();
-                restClient.doPut(url, "{'isbn': '322322', 'title': 'what'}", new Callback() {
+                restClient.doPut(url, "{\"isbn\": \"" + scanContent + "\"}", new Callback() {
                     @Override
                     public void onFailure(Request request, IOException e) {
                         e.printStackTrace();
@@ -119,10 +121,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             // Do what you want to do with the response.
                             Log.i("onCreate", "response successful");
-
+//                            formatTxt.setText("FORMAT: PUT Successful");
                         } else {
                             // Request not successful
                             Log.i("onCreate", "response is not successful");
+//                            formatTxt.setText("FORMAT: PUT Failure");
                         }
                     }
                 });
